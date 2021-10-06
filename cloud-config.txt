@@ -21,7 +21,7 @@ write_files:
       RUN pip3 install celery
       RUN pip3 install flask
       RUN git clone https://github.com/JoLinden/acc-lab3
-      WORKDIR acc-lab3
+      WORKDIR /acc-lab3
       EXPOSE 5000
       CMD ["python3","app.py"]
 
@@ -31,6 +31,7 @@ runcmd:
  - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
  - apt-get update
  - apt-get install -y docker-ce
- - docker build -t pronouns:latest .
-# - docker run -d -p 5672:5672 rabbitmq
+ - cd /home/ubuntu
+ - docker build -t pronouns .
  - docker run -d -p 5000:5000 pronouns
+# - docker run -d -p 5672:5672 rabbitmq
