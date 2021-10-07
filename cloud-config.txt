@@ -6,7 +6,7 @@ packages:
  - python3-pip
  - git
  - python-dev
- - build-essential
+ - build-essentials
 byobu_default: system
 
 write_files:

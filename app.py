@@ -6,6 +6,11 @@ import tasks
 app = Flask(__name__)
 
 
+@app.route('/pronouns/api/static', methods=['GET'])
+def pronouns():
+    return "Hello"
+
+
 @app.route('/pronouns/api/count', methods=['GET'])
 def pronouns():
     data = tasks.add.delay(1, 3)
