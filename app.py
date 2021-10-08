@@ -13,12 +13,17 @@ def static_endpoint():
 
 @app.route('/pronouns/api/count', methods=['GET'])
 def count_endpoint():
+    print("Count endpoint")
     data = tasks.add.delay(1, 3)
+    print('Task started')
     try:
         result = data.get(timeout=5)
+        print('Result received')
     except celery.exceptions.TimeoutError:
-        return ''
+        print('Task error')
+        return 'Celery could not be reached.'
 
+    print('Returning result')
     return str(result)
 
 
