@@ -7,12 +7,12 @@ app = Flask(__name__)
 
 
 @app.route('/pronouns/api/static', methods=['GET'])
-def static():
+def static_endpoint():
     return "Hello"
 
 
 @app.route('/pronouns/api/count', methods=['GET'])
-def count():
+def count_endpoint():
     data = tasks.add.delay(1, 3)
     try:
         result = data.get(timeout=5)
