@@ -1,7 +1,7 @@
 import celery.exceptions
 from flask import Flask
 
-import tasks
+import app.tasks as tasks
 
 app = Flask(__name__)
 

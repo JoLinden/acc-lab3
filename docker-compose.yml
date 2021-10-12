@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+  app:
+    build: .
+    #command: celery -A tasks worker && python3 service.py
+    ports:
+      - "5000:5000"
+    working_dir: /app
+    volumes:
+      - ./:/app
+    depends_on:
+      - rabbitmq
