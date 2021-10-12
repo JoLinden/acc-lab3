@@ -7,4 +7,3 @@ RUN pip3 install --upgrade pip
 ADD . .
 RUN pip3 install -r requirements.txt
 CMD celery -A app.tasks worker & python3 -m app.service
-#CMD ["python3","service.py"]

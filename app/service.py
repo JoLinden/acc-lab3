@@ -8,23 +8,28 @@ app = Flask(__name__)
 
 @app.route('/pronouns/api/static', methods=['GET'])
 def static_endpoint():
-    return "Hello"
+    return tasks.pronouns_task()
 
 
 @app.route('/pronouns/api/count', methods=['GET'])
 def count_endpoint():
     print("Count endpoint")
-    data = tasks.add.delay(1, 3)
+    data = tasks.pronouns_task.delay()
     print('Task started')
     try:
-        result = data.get(timeout=5)
+        result = data.get(timeout=600)
         print('Result received')
     except celery.exceptions.TimeoutError:
         print('Task error')
-        return 'Celery could not be reached.'
+        return {
+            'status': 'ERROR',
+            'status_message': 'Celery could not be reached.',
+            'pronouns': {},
+            'total_pronouns': 0
+        }
 
     print('Returning result')
-    return str(result)
+    return result
 
 
 if __name__ == '__main__':

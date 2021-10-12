@@ -8,7 +8,6 @@ services:
       - "5672:5672"
   app:
     build: .
-    #command: celery -A tasks worker && python3 service.py
     ports:
       - "5000:5000"
     working_dir: /app
