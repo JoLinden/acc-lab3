@@ -1,9 +1,9 @@
 # http://docs.openstack.org/developer/python-novaclient/ref/v2/servers.html
-import time, os, sys
+import time, os, sys, json
 import inspect
 from os import environ as env
 
-from  novaclient import client
+from novaclient import client
 import keystoneclient.v3.client as ksclient
 from keystoneauth1 import loading
 from keystoneauth1 import session
@@ -59,5 +59,17 @@ while inst_status == 'BUILD':
     time.sleep(5)
     instance = nova.servers.get(instance.id)
     inst_status = instance.status
-
 print("Instance: " + instance.name + " is in " + inst_status + " state")
+
+stream = os.popen('openstack floating ip list -f json')
+output = stream.read()
+ip_objs = json.loads(output)
+
+print('Associating a floating IP...')
+for ip_obj in ip_objs:
+    if ip_obj['Port'] is None:
+        ip_address = ip_obj["Floating IP Address"]
+        os.system(f'openstack server add floating ip {vm_name} {ip_address}')
+        print(f'Floating IP {ip_address} associated.')
+        break
+print('Service ready.')
