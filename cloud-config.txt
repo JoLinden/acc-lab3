@@ -5,7 +5,7 @@ apt_upgrade: true
 byobu_default: system
 
 runcmd:
- - git clone https://github.com/JoLinden/acc-lab3 .
+ - git clone https://github.com/JoLinden/acc-lab3 /home/ubuntu/acc-lab3/
  - cd /home/ubuntu/acc-lab3/data
  - gzip -d *
  - sudo bash
@@ -15,5 +15,5 @@ runcmd:
  - chmod +x /usr/local/bin/docker-compose
  - apt-get update
  - apt-get install -y docker-ce
- - cd /home/ubuntu
+ - cd /home/ubuntu/acc-lab3
  - docker-compose up -d
