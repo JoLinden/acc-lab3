@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/pronouns/api/static', methods=['GET'])
 def static_endpoint():
-    return tasks.pronouns_task()
+    return 'Service running.'
 
 
 @app.route('/pronouns/api/count', methods=['GET'])
