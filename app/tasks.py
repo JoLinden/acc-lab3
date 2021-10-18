@@ -18,7 +18,7 @@ def count_pronouns_in_file(filename):
     original_tweets = data.loc[data['retweeted_status'].isnull()]['text']
     all_tweets_texts = ' '.join(original_tweets)
 
-    return count_occurrences(all_tweets_texts, pronouns)
+    return count_occurrences(all_tweets_texts, pronouns), len(original_tweets)
 
 
 @app.task
@@ -28,11 +28,14 @@ def pronouns_task():
         'status': 'OK',
         'status_message': 'Data received.',
         'pronouns': Counter(),
-        'total_pronouns': 0
+        'total_pronouns': 0,
+        'total_tweets': 0
     }
 
     for filename in data_files:
-        count['pronouns'] += count_pronouns_in_file(f'data/{filename}')
+        pronouns, n_tweets = count_pronouns_in_file(f'data/{filename}')
+        count['pronouns'] += pronouns
+        count['total_tweets'] += n_tweets
 
     count['total_pronouns'] = sum(count['pronouns'].values())
     return count

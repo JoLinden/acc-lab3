@@ -25,7 +25,8 @@ def count_endpoint():
             'status': 'ERROR',
             'status_message': 'Celery could not be reached.',
             'pronouns': {},
-            'total_pronouns': 0
+            'total_pronouns': 0,
+            'total_tweets': 0
         }
 
     print('Returning result')
