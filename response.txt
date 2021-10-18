@@ -1,0 +1,15 @@
+{
+  "pronouns": {
+    "den": 165524,
+    "denna": 2751,
+    "denne": 693,
+    "det": 69414,
+    "han": 97933,
+    "hen": 2792,
+    "hon": 32512
+  },
+  "status": "OK",
+  "status_message": "Data received.",
+  "total_pronouns": 371619,
+  "total_tweets": 307992
+}
